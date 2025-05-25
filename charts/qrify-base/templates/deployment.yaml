@@ -4,6 +4,7 @@ kind: Deployment
 metadata:
   name: {{ include "qrify-base.name" . }}
   labels:
+    app: test1
     {{- include "qrify-base.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
