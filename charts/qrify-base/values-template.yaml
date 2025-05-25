@@ -3,7 +3,7 @@ name: "" # Name of the application
 environment: "" # Environment (e.g. dev, prod)
 imageTag: "" 
 deployment: true # Set to false to disable deployment
-replicaCount: 1 # Number of replicas
+replicaCount: 2 # Number of replicas
 
 image:
   repository: ""  # Optional override for the image repository
