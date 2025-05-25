@@ -1,0 +1,15 @@
+{{- if .Values.service }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "qrify-base.name" . }}
+  labels:
+    {{- include "qrify-base.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+  selector:
+    {{- include "qrify-base.selectorLabels" . | nindent 4 }}
+{{- end }}
