@@ -2,9 +2,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "qrify-base.name" . }}
+  name: {{ .Values.name }}-{{ .Values.environment }}
+  namespace: {{ .Values.environment }}
   labels:
-    app: test1
     {{- include "qrify-base.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}

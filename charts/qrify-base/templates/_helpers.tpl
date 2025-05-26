@@ -3,14 +3,12 @@
 {{- end }}
 
 
-{{- define "qrify-base.name" -}}
-{{ .Chart.Name }}
+{{- define "qrify-base.labels" -}}
+app.kubernetes.io/name: {{ .Values.name | quote }}
+app.kubernetes.io/instance: {{ .Release.Name | quote }}
+app.kubernetes.io/environment: {{ .Values.environment | quote }}
 {{- end }}
 
-{{- define "qrify-base.labels" -}}
-app.kubernetes.io/name: {{ include "qrify-base.name" . | quote }}
-app.kubernetes.io/instance: {{ .Release.Name | quote }}
-{{- end }}
 
 {{- define "qrify-base.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "qrify-base.name" . }}
