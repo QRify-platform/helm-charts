@@ -20,7 +20,7 @@ spec:
             pathType: {{ .pathType }}
             backend:
               service:
-                name: {{ include "qrify-base.name" $ }}
+                name: {{ $.Values.name }}
                 port:
                   number: {{ $.Values.service.port }}
           {{- end }}

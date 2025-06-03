@@ -11,6 +11,6 @@ app.kubernetes.io/environment: {{ .Values.environment | quote }}
 
 
 {{- define "qrify-base.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "qrify-base.name" . }}
+app.kubernetes.io/name: {{ .Values.name }}-{{ .Values.environment }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
