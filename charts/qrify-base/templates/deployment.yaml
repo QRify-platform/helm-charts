@@ -29,6 +29,11 @@ spec:
             - name: {{ .name }}
               value: {{ .value | quote }}
             {{- end }}
+          envFrom:
+            {{- range .Values.envSecrets }}
+            - secretRef:
+                name: {{ . }}
+            {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           {{- if .Values.livenessProbe }}
