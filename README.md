@@ -9,3 +9,9 @@ This repo serves as a central location for managing reusable and versioned Helm 
 - Application deployments (e.g., `qrify-web`, `qrify-api`)
 - Shared templates (e.g., `qrify-base`)
 - Environment-specific deployments (dev, prod) through Helm values
+
+Each chart is **versioned using GitHub Pages** and the chart version is **automatically bumped on every push to `main`** using GitHub Actions.
+
+This ensures the latest changes are always published to the Helm chart repository and available for consumption by the platform’s cluster-state and deployment workflows.
+
+---
