@@ -19,9 +19,13 @@ spec:
   template:
     metadata:
       annotations:
-        {{- toYaml (default dict .Values.podAnnotations) | nindent 8 }}
+        {{- if .Values.podAnnotations }}
+        {{- toYaml .Values.podAnnotations | nindent 8 }}
+        {{- else }}
+        {}
+        {{- end }}
       labels:
-        {{- include "qrify-base.labels" . | nindent 4 }}
+        {{- include "qrify-base.labels" . | nindent 8 }}
         {{- with .Values.podLabels }}
         {{- range $key, $value := . }}
         {{ $key }}: {{ $value | quote }}
