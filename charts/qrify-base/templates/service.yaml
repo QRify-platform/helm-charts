@@ -4,10 +4,12 @@ kind: Service
 metadata:
   name: {{ .Values.name }}
   namespace: {{ .Values.environment }}
-labels:
-  {{- include "qrify-base.labels" . | nindent 4 }}
-  {{- range $key, $value := .Values.labels }}
-  {{ $key }}: {{ $value | quote }}
+  labels:
+  {{- include "qrify-base.labels" . | nindent 2 }}
+  {{- with .Values.labels }}
+  {{- range $key, $value := . }}
+    {{ $key }}: {{ $value | quote }}
+  {{- end }}
   {{- end }}
 
 spec:
