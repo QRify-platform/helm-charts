@@ -12,6 +12,7 @@ spec:
   selector:
     matchLabels:
       {{- include "qrify-base.selectorLabels" . | nindent 6 }}
+      
   namespaceSelector:
     matchNames:
       - {{ .Values.environment }}

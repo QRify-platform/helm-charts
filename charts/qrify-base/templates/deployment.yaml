@@ -6,7 +6,9 @@ metadata:
   namespace: {{ .Values.environment }}
   labels:
     {{- include "qrify-base.labels" . | nindent 4 }}
-    {{ .Values.labels | default dict | nindent 4 }}
+    {{- range $key, $value := .Values.labels }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -16,9 +18,11 @@ spec:
     metadata:
       annotations:
         {{- toYaml .Values.podAnnotations | default dict | nindent 8 }}
-      labels:
-        {{ .Values.podLabels | default dict | nindent 8 }}
-        {{- include "qrify-base.selectorLabels" . | nindent 8 }}
+    labels:
+      {{- include "qrify-base.labels" . | nindent 4 }}
+      {{- range $key, $value := .Values.podlabels }}
+      {{ $key }}: {{ $value | quote }}
+      {{- end }}
     spec:
       containers:
         - name: {{ .Values.name }}
