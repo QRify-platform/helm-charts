@@ -13,6 +13,8 @@ spec:
       {{- include "qrify-base.selectorLabels" . | nindent 6 }}
   template:
     metadata:
+      annotations:
+        {{- toYaml .Values.podAnnotations | default dict | nindent 8 }}
       labels:
         {{- include "qrify-base.selectorLabels" . | nindent 8 }}
     spec:
