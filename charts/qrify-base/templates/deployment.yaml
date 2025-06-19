@@ -19,14 +19,14 @@ spec:
   template:
     metadata:
       annotations:
-        {{- toYaml .Values.podAnnotations | default dict | nindent 8 }}
-    labels:
-      {{- include "qrify-base.labels" . | nindent 4 }}
-      {{- with .Values.podLabels }}
-      {{- range $key, $value := . }}
-      {{ $key }}: {{ $value | quote }}
-      {{- end }}
-      {{- end }}
+        {{- toYaml (default dict .Values.podAnnotations) | nindent 8 }}
+      labels:
+        {{- include "qrify-base.labels" . | nindent 4 }}
+        {{- with .Values.podLabels }}
+        {{- range $key, $value := . }}
+        {{ $key }}: {{ $value | quote }}
+        {{- end }}
+        {{- end }}
     spec:
       containers:
         - name: {{ .Values.name }}
