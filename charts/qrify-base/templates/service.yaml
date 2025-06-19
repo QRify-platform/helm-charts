@@ -5,13 +5,12 @@ metadata:
   name: {{ .Values.name }}
   namespace: {{ .Values.environment }}
   labels:
-  {{- include "qrify-base.labels" . | nindent 2 }}
-  {{- with .Values.labels }}
-  {{- range $key, $value := . }}
+    {{- include "qrify-base.labels" . | nindent 4 }}
+    {{- with .Values.labels }}
+    {{- range $key, $value := . }}
     {{ $key }}: {{ $value | quote }}
-  {{- end }}
-  {{- end }}
-
+    {{- end }}
+    {{- end }}
 spec:
   type: {{ .Values.service.type }}
   ports:

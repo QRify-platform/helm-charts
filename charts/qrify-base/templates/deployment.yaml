@@ -5,12 +5,12 @@ metadata:
   name: {{ .Values.name }}-{{ .Values.environment }}
   namespace: {{ .Values.environment }}
   labels:
-  {{- include "qrify-base.labels" . | nindent 2 }}
-  {{- with .Values.labels }}
-  {{- range $key, $value := . }}
+    {{- include "qrify-base.labels" . | nindent 4 }}
+    {{- with .Values.labels }}
+    {{- range $key, $value := . }}
     {{ $key }}: {{ $value | quote }}
-  {{- end }}
-  {{- end }}
+    {{- end }}
+    {{- end }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -21,12 +21,12 @@ spec:
       annotations:
         {{- toYaml .Values.podAnnotations | default dict | nindent 8 }}
     labels:
-    {{- include "qrify-base.labels" . | nindent 2 }}
-    {{- with .Values.podLabels }}
-    {{- range $key, $value := . }}
+      {{- include "qrify-base.labels" . | nindent 4 }}
+      {{- with .Values.podLabels }}
+      {{- range $key, $value := . }}
       {{ $key }}: {{ $value | quote }}
-    {{- end }}
-    {{- end }}
+      {{- end }}
+      {{- end }}
     spec:
       containers:
         - name: {{ .Values.name }}
