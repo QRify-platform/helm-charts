@@ -13,6 +13,16 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2025-06-19T22:47:35.450326796Z"
+    description: A Helm chart for qrify services
+    digest: 436c298144fca573c981825f71d2867cf74e891684814590f18a4181aac9f659
+    name: qrify-base
+    type: application
+    urls:
+    - https://github.com/QRify-platform/helm-charts/releases/download/qrify-base-0.0.12/qrify-base-0.0.12.tgz
+    version: 0.0.12
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2025-06-19T22:44:55.670017895Z"
     description: A Helm chart for qrify services
     digest: 0d92629c587a321724ee9eff2c172c1091962ab0484ffb63056d5b0da6e9820c
@@ -121,4 +131,4 @@ entries:
     urls:
     - https://github.com/QRify-platform/helm-charts/releases/download/qrify-base-0.0.1/qrify-base-0.0.1.tgz
     version: 0.0.1
-generated: "2025-06-19T22:44:55.670113183Z"
+generated: "2025-06-19T22:47:35.450449477Z"
