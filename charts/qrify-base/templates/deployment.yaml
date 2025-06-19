@@ -6,6 +6,7 @@ metadata:
   namespace: {{ .Values.environment }}
   labels:
     {{- include "qrify-base.labels" . | nindent 4 }}
+    {{ .Values.labels | default dict | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -16,6 +17,7 @@ spec:
       annotations:
         {{- toYaml .Values.podAnnotations | default dict | nindent 8 }}
       labels:
+        {{ .Values.podLabels | default dict | nindent 8 }}
         {{- include "qrify-base.selectorLabels" . | nindent 8 }}
     spec:
       containers:

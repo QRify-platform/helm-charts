@@ -6,6 +6,7 @@ metadata:
   namespace: {{ .Values.environment }}
   labels:
     {{- include "qrify-base.labels" . | nindent 4 }}
+    {{ .Values.labels | default dict | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
