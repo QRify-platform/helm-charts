@@ -5,7 +5,8 @@ metadata:
   name: {{ .Values.name }}-{{ .Values.environment }}-monitor
   namespace: {{ .Values.environment }}
   labels:
-    release: prometheus 
+    monitoring: enabled                    
+    release: prometheus                     
     {{- include "qrify-base.labels" . | nindent 4 }}
 spec:
   selector:
