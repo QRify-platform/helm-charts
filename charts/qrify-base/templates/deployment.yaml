@@ -1,35 +1,40 @@
-{{- if .Values.deployment }}
+{{- if .Values.rollout.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+{{- else if .Values.deployment }}
 apiVersion: apps/v1
 kind: Deployment
+{{- end }}
 metadata:
   name: {{ .Values.name }}-{{ .Values.environment }}
   namespace: {{ .Values.environment }}
   labels:
     {{- include "qrify-base.labels" . | nindent 4 }}
     {{- with .Values.labels }}
-    {{- range $key, $value := . }}
-    {{ $key }}: {{ $value | quote }}
-    {{- end }}
+    {{- toYaml . | nindent 4 }}
     {{- end }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       {{- include "qrify-base.selectorLabels" . | nindent 6 }}
+  {{- if .Values.rollout.enabled }}
+  strategy:
+    blueGreen:
+      activeService: {{ .Values.rollout.activeService | quote }}
+      previewService: {{ .Values.rollout.previewService | quote }}
+      autoPromotionEnabled: {{ .Values.rollout.autoPromotionEnabled | default true }}
+  {{- end }}
   template:
     metadata:
-      annotations:
-        {{- if .Values.podAnnotations }}
-        {{- toYaml .Values.podAnnotations | nindent 8 }}
-        {{- else }}
-        {}
-        {{- end }}
       labels:
         {{- include "qrify-base.labels" . | nindent 8 }}
         {{- with .Values.podLabels }}
-        {{- range $key, $value := . }}
-        {{ $key }}: {{ $value | quote }}
+        {{- toYaml . | nindent 8 }}
         {{- end }}
+      annotations:
+        {{- if .Values.podAnnotations }}
+        {{- toYaml .Values.podAnnotations | nindent 8 }}
         {{- end }}
     spec:
       containers:
@@ -60,4 +65,3 @@ spec:
           readinessProbe:
             {{- toYaml .Values.readinessProbe | nindent 12 }}
           {{- end }}
-{{- end }}
