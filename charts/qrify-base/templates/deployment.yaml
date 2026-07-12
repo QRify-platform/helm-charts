@@ -37,24 +37,31 @@ spec:
         {{- toYaml .Values.podAnnotations | nindent 8 }}
         {{- end }}
     spec:
+      {{- if .Values.serviceAccount.create }}
+      serviceAccountName: {{ .Values.serviceAccount.name | default .Values.name }}
+      {{- else if .Values.serviceAccount.name }}
+      serviceAccountName: {{ .Values.serviceAccount.name }}
+      {{- end }}
       containers:
         - name: {{ .Values.name }}
           image: "{{ include "qrify.ecrRegistry" . }}/{{ .Values.name }}-{{ .Values.environment }}:{{ .Values.imageTag }}"
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
-              containerPort: 80
+              containerPort: {{ .Values.service.targetPort | default .Values.service.port | default 80 }}
               protocol: TCP
           env:
             {{- range .Values.env }}
             - name: {{ .name }}
               value: {{ .value | quote }}
             {{- end }}
+          {{- if .Values.envSecrets }}
           envFrom:
             {{- range .Values.envSecrets }}
             - secretRef:
                 name: {{ . }}
             {{- end }}
+          {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           {{- if .Values.livenessProbe }}

@@ -1,5 +1,5 @@
 {{- define "qrify.ecrRegistry" -}}
-125896621773.dkr.ecr.us-east-2.amazonaws.com
+{{- .Values.ecrRegistry | default "856096729725.dkr.ecr.us-east-2.amazonaws.com" -}}
 {{- end }}
 
 # base labels and labels fro values file

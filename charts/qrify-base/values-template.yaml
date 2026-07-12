@@ -10,10 +10,19 @@ image:
   pullPolicy: IfNotPresent # Image pull policy (e.g. Always, IfNotPresent, Never)
 
 # Environment variables
-env: [] 
+env: []
 # Example:
 # - name: NEXT_PUBLIC_API_BASE_URL
 #   value: "https://api.qrify.com"
+
+# Optional secrets mounted via envFrom
+envSecrets: []
+
+# Service account (set annotations.eks.amazonaws.com/role-arn for IRSA)
+serviceAccount:
+  create: false
+  name: ""
+  annotations: {}
 
 # Service configuration
 service:
