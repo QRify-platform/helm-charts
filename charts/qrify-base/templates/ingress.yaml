@@ -5,25 +5,27 @@ metadata:
   name: {{ .Values.name }}-{{ .Values.environment }}
   namespace: {{ .Values.environment }}
   annotations:
-    {{- toYaml .Values.ingress.annotations | default dict | nindent 4 }}
+    {{- toYaml (.Values.ingress.annotations | default dict) | nindent 4 }}
 spec:
   {{- if .Values.ingress.className }}
   ingressClassName: {{ .Values.ingress.className }}
   {{- end }}
   rules:
     {{- range .Values.ingress.hosts }}
-    - host: {{ .host }}
-      http:
+    - http:
         paths:
           {{- range .paths }}
-          - path: {{ .path }}
+          - path: {{ .path | quote }}
             pathType: {{ .pathType }}
             backend:
               service:
-                name: {{ $.Values.name }}
+                name: {{ if and (($.Values).rollout).enabled (($.Values).rollout).activeService }}{{ $.Values.rollout.activeService }}{{ else }}{{ $.Values.name }}{{ end }}
                 port:
                   number: {{ $.Values.service.port }}
           {{- end }}
+      {{- if .host }}
+      host: {{ .host | quote }}
+      {{- end }}
     {{- end }}
   {{- if .Values.ingress.tls }}
   tls:
