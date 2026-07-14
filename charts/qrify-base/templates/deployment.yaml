@@ -23,7 +23,7 @@ spec:
     blueGreen:
       activeService: {{ .Values.rollout.activeService | quote }}
       previewService: {{ .Values.rollout.previewService | quote }}
-      autoPromotionEnabled: {{ .Values.rollout.autoPromotionEnabled | default true }}
+      autoPromotionEnabled: {{ hasKey .Values.rollout "autoPromotionEnabled" | ternary .Values.rollout.autoPromotionEnabled true }}
   {{- end }}
   template:
     metadata:
