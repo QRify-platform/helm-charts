@@ -201,4 +201,16 @@ entries:
     urls:
     - https://github.com/QRify-platform/helm-charts/releases/download/qrify-base-0.0.1/qrify-base-0.0.1.tgz
     version: 0.0.1
-generated: "2026-07-14T21:16:33.028925904Z"
+  qrify-secrets:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2026-07-23T20:04:11.007157233Z"
+    description: ExternalSecrets that sync AWS Secrets Manager into stable K8s Secret
+      names
+    digest: a2f4233ac816d4d3a6e69c3f078f06193031e356bcc73387b07365aecac21e25
+    name: qrify-secrets
+    type: application
+    urls:
+    - https://github.com/QRify-platform/helm-charts/releases/download/qrify-secrets-0.0.1/qrify-secrets-0.0.1.tgz
+    version: 0.0.1
+generated: "2026-07-23T20:04:11.007246459Z"
