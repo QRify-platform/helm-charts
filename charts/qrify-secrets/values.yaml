@@ -1,6 +1,8 @@
 environment: dev
 awsRegion: us-east-2
 secretPrefix: qrify
+# How often ExternalSecrets re-pull from Secrets Manager
+refreshInterval: 5m
 
 # Each entry → ExternalSecret → K8s Secret with the same name
 # SM path: qrify/<environment>/<name>
