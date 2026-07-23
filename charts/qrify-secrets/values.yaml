@@ -1,0 +1,7 @@
+environment: dev
+awsRegion: us-east-2
+secretPrefix: qrify
+
+# Each entry → ExternalSecret → K8s Secret with the same name
+# SM path: qrify/<environment>/<name>
+secrets: []
