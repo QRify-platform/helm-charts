@@ -1,0 +1,28 @@
+{{- if and .Values.autoscaling .Values.autoscaling.enabled }}
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ .Values.name }}-{{ .Values.environment }}
+  namespace: {{ .Values.environment }}
+  labels:
+    {{- include "qrify-base.labels" . | nindent 4 }}
+spec:
+  scaleTargetRef:
+    {{- if and .Values.rollout .Values.rollout.enabled }}
+    apiVersion: argoproj.io/v1alpha1
+    kind: Rollout
+    {{- else }}
+    apiVersion: apps/v1
+    kind: Deployment
+    {{- end }}
+    name: {{ .Values.name }}-{{ .Values.environment }}
+  minReplicas: {{ .Values.autoscaling.minReplicas | default 1 }}
+  maxReplicas: {{ .Values.autoscaling.maxReplicas | default 4 }}
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: {{ .Values.autoscaling.targetCPUUtilizationPercentage | default 70 }}
+{{- end }}

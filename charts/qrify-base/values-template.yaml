@@ -3,7 +3,14 @@ name: "" # Name of the application
 environment: "" # Environment (e.g. dev, prod)
 imageTag: "" 
 deployment: true # Set to false to disable deployment
-replicaCount: 2 # Number of replicas
+replicaCount: 2 # Number of replicas (ignored when autoscaling.enabled)
+
+# Horizontal Pod Autoscaler (requires metrics-server + CPU requests)
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 4
+  targetCPUUtilizationPercentage: 70
 
 image:
   repository: ""  # Optional override for the image repository
@@ -48,15 +55,14 @@ ingress:
   #     hosts:
   #       - qrify-web.yourdomain.com
 
-# Kubernetes resource limits
-resources: {} 
+# Kubernetes resource limits (CPU requests required for HPA)
+resources: {}
 # Example:
-# limits:
-#   cpu: "100m"
-#   memory: "128Mi"
 # requests:
 #   cpu: "100m"
 #   memory: "128Mi"
+# limits:
+#   memory: "256Mi"
 
 
 # Probes (optional) 
