@@ -5,5 +5,11 @@ secretPrefix: qrify
 refreshInterval: 5m
 
 # Each entry → ExternalSecret → K8s Secret with the same name
-# SM path: qrify/<environment>/<name>
+# SM path: qrify/<environment>/<remoteKey|name>
 secrets: []
+# Example (two apps, one AWS secret, no Argo ownership clash):
+# secrets:
+#   - name: qrify-web-cognito
+#     remoteKey: qrify-cognito
+#   - name: qrify-web-api-cognito
+#     remoteKey: qrify-cognito
