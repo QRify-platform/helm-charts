@@ -214,6 +214,17 @@ entries:
   qrify-secrets:
   - apiVersion: v2
     appVersion: 1.0.0
+    created: "2026-07-25T08:48:08.297094528Z"
+    description: ExternalSecrets that sync AWS Secrets Manager into stable K8s Secret
+      names
+    digest: a106f9c7e86bf325e58fdc08fb14272fe9e1bbd4fedad8f50bcf1ff7ea2dc959
+    name: qrify-secrets
+    type: application
+    urls:
+    - https://github.com/QRify-platform/helm-charts/releases/download/qrify-secrets-0.0.3/qrify-secrets-0.0.3.tgz
+    version: 0.0.3
+  - apiVersion: v2
+    appVersion: 1.0.0
     created: "2026-07-23T21:25:21.619721217Z"
     description: ExternalSecrets that sync AWS Secrets Manager into stable K8s Secret
       names
@@ -234,4 +245,4 @@ entries:
     urls:
     - https://github.com/QRify-platform/helm-charts/releases/download/qrify-secrets-0.0.1/qrify-secrets-0.0.1.tgz
     version: 0.0.1
-generated: "2026-07-24T01:42:24.189194843Z"
+generated: "2026-07-25T08:48:08.297158718Z"
